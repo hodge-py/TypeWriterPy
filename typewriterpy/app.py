@@ -2,7 +2,10 @@ import sys
 from PySide6 import QtWidgets
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
+from PySide6.QtCore import QFile
+import os
 
+basedir = os.path.dirname(__file__)
 
 class mainApp:
 
@@ -15,13 +18,12 @@ class mainApp:
             w.setWindowTitle("MainWindow Title")
 
         app = QtWidgets.QApplication(sys.argv)
-
-        self.window = loader.load("main.ui", None)
+        filer = QFile(os.path.join(basedir, 'main.ui'))
+        filer.open(QFile.ReadOnly)
+        self.window = loader.load(filer, None)
+        filer.close()
         mainwindow_setup(self.window)
-        #text=open('test.txt').read()
-        #window.textEdit.setPlainText(text)
         self.window.showFullScreen()
-        print(self.window.actionOpen)
         files = self.window.actionOpen.triggered.connect(self.openFileSystem)
         fileSaveAs = self.window.actionSave_As.triggered.connect(self.SaveAsFileSystem)
         fileSave = self.window.actionSave.triggered.connect(self.SaveFileSystem)
@@ -33,6 +35,7 @@ class mainApp:
         file = self.openFileDialog()
         text=open(file).read()
         self.window.textEdit.setPlainText(text)
+        self.window.labeltxt.setText(file)
 
     def openFileDialog(self):
         parent = None # QtGui.QMainWindow()
@@ -54,6 +57,7 @@ class mainApp:
     def SaveAsFileSystem(self,event):
         file = self.openSaveAsDialog()
         text = open(file,'w').write(self.window.textEdit.toPlainText())
+        self.window.labeltxt.setText(file)
 
     
     def SaveFileSystem(self,event):
@@ -68,4 +72,5 @@ class mainApp:
 
 
 
-app = mainApp()
+if __name__ == '__main__':
+    app = mainApp()
