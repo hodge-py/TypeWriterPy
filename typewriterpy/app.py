@@ -28,6 +28,8 @@ class mainApp:
         fileSaveAs = self.window.actionSave_As.triggered.connect(self.SaveAsFileSystem)
         fileSave = self.window.actionSave.triggered.connect(self.SaveFileSystem)
         self.window.actionExit.triggered.connect(self.exitApp)
+        self.window.fontSpin.valueChanged.connect(self.changeFont)
+        self.window.bold.stateChanged.connect(self.boldText)
 
         app.exec()
 
@@ -65,6 +67,15 @@ class mainApp:
             pass
         else:
             text = open(self.current,'w').write(self.window.textEdit.toPlainText())
+
+    def changeFont(self,event):
+        self.window.textEdit.setFontPointSize(self.window.fontSpin.value())
+
+    def boldText(self,event):
+        if self.window.bold.isChecked():
+            self.window.textEdit.setFontWeight(700)
+        else:
+            self.window.textEdit.setFontWeight(400)
 
 
     def exitApp(self,event):
