@@ -30,6 +30,7 @@ class mainApp:
         self.window.actionExit.triggered.connect(self.exitApp)
         self.window.fontSpin.valueChanged.connect(self.changeFont)
         self.window.bold.stateChanged.connect(self.boldText)
+        self.window.italic.stateChanged.connect(self.italicText)
 
         app.exec()
 
@@ -76,6 +77,12 @@ class mainApp:
             self.window.textEdit.setFontWeight(700)
         else:
             self.window.textEdit.setFontWeight(400)
+    
+    def italicText(self,event):
+        if self.window.italic.isChecked():
+            self.window.textEdit.setFontItalic(True)
+        else:
+            self.window.textEdit.setFontItalic(False)
 
 
     def exitApp(self,event):

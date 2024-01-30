@@ -69,8 +69,21 @@
         </item>
         <item>
          <widget class="QCheckBox" name="bold">
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
           <property name="text">
            <string>Bold</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="italic">
+          <property name="text">
+           <string>Italics</string>
           </property>
          </widget>
         </item>
