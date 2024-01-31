@@ -68,22 +68,74 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="bold">
+         <widget class="QComboBox" name="fontBox">
           <property name="font">
            <font>
-            <weight>50</weight>
-            <bold>false</bold>
+            <family>Courier New</family>
+            <stylestrategy>PreferAntialias</stylestrategy>
            </font>
+          </property>
+          <property name="currentText">
+           <string>Courier New</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Courier New</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Times</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="bold">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>Bold</string>
           </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="italic">
+         <widget class="QPushButton" name="italic">
+          <property name="font">
+           <font>
+            <italic>true</italic>
+           </font>
+          </property>
           <property name="text">
-           <string>Italics</string>
+           <string>Italic</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="underline">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="text">
+           <string>Underline</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

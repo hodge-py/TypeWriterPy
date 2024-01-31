@@ -3,6 +3,7 @@ from PySide6 import QtWidgets
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog
 from PySide6.QtCore import QFile
+from PySide6.QtGui import QFont
 import os
 
 basedir = os.path.dirname(__file__)
@@ -24,13 +25,7 @@ class mainApp:
         filer.close()
         mainwindow_setup(self.window)
         self.window.showFullScreen()
-        files = self.window.actionOpen.triggered.connect(self.openFileSystem)
-        fileSaveAs = self.window.actionSave_As.triggered.connect(self.SaveAsFileSystem)
-        fileSave = self.window.actionSave.triggered.connect(self.SaveFileSystem)
-        self.window.actionExit.triggered.connect(self.exitApp)
-        self.window.fontSpin.valueChanged.connect(self.changeFont)
-        self.window.bold.stateChanged.connect(self.boldText)
-        self.window.italic.stateChanged.connect(self.italicText)
+        self.triggers()
 
         app.exec()
 
@@ -83,7 +78,30 @@ class mainApp:
             self.window.textEdit.setFontItalic(True)
         else:
             self.window.textEdit.setFontItalic(False)
+    
+    def underlineText(self,event):
+        if self.window.underline.isChecked():
+            self.window.textEdit.setFontUnderline(True)
+        else:
+            self.window.textEdit.setFontUnderline(False)
 
+    def triggers(self):
+        self.window.actionOpen.triggered.connect(self.openFileSystem)
+        self.window.actionSave_As.triggered.connect(self.SaveAsFileSystem)
+        self.window.actionSave.triggered.connect(self.SaveFileSystem)
+        self.window.actionExit.triggered.connect(self.exitApp)
+        self.window.fontSpin.valueChanged.connect(self.changeFont)
+        self.window.bold.clicked.connect(self.boldText)
+        self.window.italic.clicked.connect(self.italicText)
+        self.window.underline.clicked.connect(self.underlineText)
+        self.window.fontBox.currentIndexChanged.connect(self.index_changed)
+
+    def index_changed(self,index):
+        if index == 1:
+            self.window.textEdit.setCurrentFont(QFont('Times', self.window.textEdit.fontPointSize()))
+        else:
+            self.window.textEdit.setCurrentFont(QFont("Courier New", self.window.textEdit.fontPointSize()))
+            
 
     def exitApp(self,event):
         QApplication.quit()
