@@ -98,9 +98,9 @@ class mainApp:
 
     def index_changed(self,index):
         if index == 1:
-            self.window.textEdit.setCurrentFont(QFont('Times', self.window.textEdit.fontPointSize()))
+            self.window.textEdit.setCurrentFont(QFont('Times', 10))
         else:
-            self.window.textEdit.setCurrentFont(QFont("Courier New", self.window.textEdit.fontPointSize()))
+            self.window.textEdit.setCurrentFont(QFont("Courier New", 10))
             
 
     def exitApp(self,event):
